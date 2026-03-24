@@ -1,3 +1,5 @@
 .tmp/
 .volumes/
-
+*.dump
+*.sql
+*.log
