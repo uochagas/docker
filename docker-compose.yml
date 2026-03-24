@@ -2,31 +2,19 @@
     services:
         db:
             container_name: postgres
-            image: postgres
+            image: postgres:16-alpine
             restart: always
             environment:
-                POSTGRES_PASSWORD: ""
-                POSTGRES_HOST_AUTH_METHOD: "trust"
+                POSTGRES_USER: "postgres"
+                POSTGRES_PASSWORD: "123"
+                # POSTGRES_HOST_AUTH_METHOD: "trust"
+                TZ: "America/Porto_Velho"
             ports:
                 - 5432:5432
             volumes:
                 - ./volumes/PostgreSQL:/var/lib/postgresql/data
 
-        pgadmin:
-            restart: always
-            container_name: pgadmin4
-            image: dpage/pgadmin4
-            environment:
-                PGADMIN_DEFAULT_EMAIL: "uilton@ifro.com"
-                PGADMIN_DEFAULT_PASSWORD: "123456"
-            ports:
-                - "80:80"
-            volumes:
-                - ./volumes/pgadmin:/var/lib/pgadmin/storage/
-            depends_on:
-                - db
-
-        mailhog:
+        mail:
             container_name: mailhog
             image: mailhog/mailhog
             restart: always
